@@ -1,0 +1,16 @@
+.auth {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #ffd1e8;
+}
+
+.authShell {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
