@@ -1,0 +1,27 @@
+.side-tab {
+  position: fixed;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 200;
+}
+
+.side-btn {
+  background: linear-gradient(180deg, #fff, rgba(255,255,255,0.9));
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(43,16,54,0.06);
+}
+
+.side-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(43,16,54,0.08); }
+
+@media (max-width: 800px) {
+  .side-tab { left: 8px; gap: 8px; }
+  .side-btn { padding: 8px 10px; font-size: 14px; }
+}

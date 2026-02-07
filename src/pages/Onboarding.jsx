@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SideTab from "../components/SideTab.jsx";
 
 export default function Onboarding() {
   const nav = useNavigate();
@@ -22,13 +23,16 @@ export default function Onboarding() {
   }
 
   return (
-    <div style={{ padding: 24 }}>
-      <h1>Build your profile</h1>
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
-      <input value={pronouns} onChange={(e) => setPronouns(e.target.value)} placeholder="Pronouns" />
-      <input value={creativeType} onChange={(e) => setCreativeType(e.target.value)} placeholder="Creative type (Editor, DP...)" />
-      <textarea value={bio} onChange={(e) => setBio(e.target.value)} placeholder="About/Bio" />
-      <button onClick={save}>Finish</button>
-    </div>
+    <>
+      <SideTab />
+      <div style={{ padding: 24 }}>
+        <h1>Build your profile</h1>
+        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+        <input value={pronouns} onChange={(e) => setPronouns(e.target.value)} placeholder="Pronouns" />
+        <input value={creativeType} onChange={(e) => setCreativeType(e.target.value)} placeholder="Creative type (Editor, DP...)" />
+        <textarea value={bio} onChange={(e) => setBio(e.target.value)} placeholder="About/Bio" />
+        <button onClick={save}>Finish</button>
+      </div>
+    </>
   );
 }
