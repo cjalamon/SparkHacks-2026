@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import EventCard from '../components/EventCard'
+import Navbar from '../components/Navbar.jsx'
+import SideTab from '../components/SideTab.jsx'
 
 export default function Events() {
   const [events, setEvents] = useState([])
@@ -25,7 +27,10 @@ export default function Events() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-50">
+    <>
+      <Navbar />
+      <SideTab />
+      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-50">
       {/* Header */}
       <div className="bg-white shadow-md border-b-2 border-pink-200">
         <div className="container mx-auto px-8 py-6">
@@ -97,5 +102,6 @@ export default function Events() {
         )}
       </div>
     </div>
+    </>
   )
 }
