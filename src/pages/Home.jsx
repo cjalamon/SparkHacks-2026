@@ -2,59 +2,47 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Navbar from '../components/Navbar.jsx';
 import SideTab from '../components/SideTab.jsx';
-import FilterChips from '../FilterChips';
-import CreatorGrid from '../CreatorGrid';
-import MapOverlay from '../MapOverlay';
 import CreateListingForm from '../components/CreateListingForm.jsx';
 import cLogo from '../assets/c.png';
 
-
-
 function Home() {
-  const [creators, setCreators] = useState([]);
-  const [showCreateForm, setShowCreateForm] = useState(false)
-  const [filteredCreators, setFilteredCreators] = useState([]);
-  const [activeFilter, setActiveFilter] = useState('All Creatives');
-  const [showMap, setShowMap] = useState(false);
-  const [userLocation, setUserLocation] = useState(null);
+  const [listings, setListings] = useState([]); // Changed from creators to listings
+  const [showCreateForm, setShowCreateForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Fetch job listings
+  const fetchListings = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/api/listings');
+      const data = await response.json();
+      setListings(data);
+    } catch (error) {
+      console.error('Error fetching listings:', error);
+    }
+  };
+
   useEffect(() => {
-    setUserLocation({ lat: 41.8781, lng: -87.6298 });
+    fetchListings();
   }, []);
 
-  useEffect(() => {
-    const fetchCreators = async () => {
-      if (!userLocation) return;
-      try {
-        const response = await fetch(`http://localhost:5000/api/users/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=25`);
-        const data = await response.json();
-        setCreators(data);
-        setFilteredCreators(data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-    fetchCreators();
-  }, [userLocation]);
+  // Handle new listing submission
+  const handleNewListing = (newListing) => {
+    setListings(prev => [newListing, ...prev]); // Add to top of list
+  };
 
-  useEffect(() => {
-    let filtered = creators;
-    if (activeFilter !== 'All Creatives') {
-      filtered = filtered.filter(c => c.creative_type.toLowerCase() === activeFilter.toLowerCase().replace(/s$/, ''));
-    }
-    if (searchQuery) {
-      filtered = filtered.filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()));
-    }
-    setFilteredCreators(filtered);
-  }, [activeFilter, searchQuery, creators]);
+  // Filter listings by search
+  const filteredListings = listings.filter(listing => 
+    searchQuery === '' || 
+    listing.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    listing.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
       <Navbar />
       <SideTab />
       <div className="eventsPage">
-        {/* Header - same as Events page */}
+        {/* Header */}
         <div className="eventsHeader">
           <div className="eventsHeaderContent">
             <div className="eventsBrand">
@@ -67,21 +55,26 @@ function Home() {
                 </div>
               <span className="eventsBrandText">CASTLY</span>
             </div>
+            <nav className="eventsNav">
+              <a href="/home" className="eventsNavLink active">Home</a>
+              <a href="/events" className="eventsNavLink">Events</a>
+              <a href="/profile" className="eventsNavLink">Profile</a>
+            </nav>
           </div>
         </div>
 
         {/* Main Content */}
         <div className="eventsContainer">
           <div className="eventsTitle">
-            <h1>Discover Creators</h1>
-            <p>Find filmmakers, actors, and creatives near you</p>
+            <h1>Job Listings</h1>
+            <p>Find creative opportunities and collaborations</p>
           </div>
 
           {/* Search Bar */}
           <div style={{ marginBottom: '20px' }}>
             <input 
               type="text"
-              placeholder="Search for filmmakers, actors, cameramen..."
+              placeholder="Search job listings..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
@@ -94,51 +87,80 @@ function Home() {
             />
           </div>
 
-          {/* Filter Chips */}
-          <FilterChips activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-
-          {/* Map Toggle */}
-          <div style={{ margin: '20px 0' }}>
+          {/* Create Listing Button */}
+          <div className="eventsTabs">
             <button 
-              onClick={() => setShowMap(!showMap)}
               className="eventsTab"
-              style={{ background: showMap ? '#9333ea' : 'white', color: showMap ? 'white' : '#333' }}
+              onClick={() => setShowCreateForm(true)}
+              style={{ background: '#9333ea', color: 'white' }}
             >
-              📍 {showMap ? 'Hide Map' : 'Show Map'}
+              + Create Listing
             </button>
           </div>
 
-          {/* Map Overlay */}
-          {showMap && (
-            <MapOverlay 
-              creators={filteredCreators}
-              userLocation={userLocation}
-              onClose={() => setShowMap(false)}
-            />
-          )}
+          {/* Job Listings Grid */}
+          <div className="eventsGrid">
+            {filteredListings.length > 0 ? (
+              filteredListings.map(listing => (
+                <div key={listing.id} className="eventCard">
+                  <div className="eventContent">
+                    <h3 className="eventTitle">{listing.title}</h3>
+                    <p className="eventDescription">{listing.description}</p>
+                    
+                    <div style={{ margin: '12px 0', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                      <span className="eventsTab" style={{ 
+                        display: 'inline-block', 
+                        fontSize: '12px',
+                        background: '#f0e7ff',
+                        color: '#7c3aed'
+                      }}>
+                        {listing.role_type}
+                      </span>
+                      {listing.budget && (
+                        <span className="eventsTab" style={{ 
+                          display: 'inline-block', 
+                          fontSize: '12px',
+                          background: '#dcfce7',
+                          color: '#16a34a'
+                        }}>
+                          {listing.budget}
+                        </span>
+                      )}
+                    </div>
 
-          {/* Creator Grid */}
-          <div style={{ marginTop: '20px' }}>
-            <CreatorGrid creators={filteredCreators} userLocation={userLocation} />
+                    <div className="eventFooter">
+                      <div className="eventLocation">
+                        <span className="eventLocationIcon">📍</span>
+                        <div>
+                          <p className="eventLocationName">{listing.location}</p>
+                          <p className="eventDate">
+                            Deadline: {listing.deadline ? new Date(listing.deadline).toLocaleDateString() : 'Not specified'}
+                          </p>
+                        </div>
+                      </div>
+                      {listing.contact_email && (
+                        <span style={{ fontSize: '12px', color: '#666' }}>
+                          📧 {listing.contact_email}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="eventsEmpty">
+                <p>No job listings yet. Be the first to post!</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      {/* Floating Action Button */}
-      <button 
-        className="fab-create"
-        onClick={() => setShowCreateForm(true)}
-      >
-        ➕ Create Listing
-      </button>
 
       {/* Create Listing Modal */}
       {showCreateForm && (
         <CreateListingForm 
           onClose={() => setShowCreateForm(false)}
-          onSubmit={(newListing) => {
-            // Add to creators list or refresh
-            setCreators([newListing, ...creators])
-          }}
+          onSubmit={handleNewListing}
         />
       )}
     </>
