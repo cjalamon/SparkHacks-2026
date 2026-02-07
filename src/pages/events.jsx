@@ -30,91 +30,94 @@ export default function Events() {
     <>
       <Navbar />
       <SideTab />
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-50">
-      {/* Header */}
-      <div className="events-header">
-        <div className="header-content">
-          <h1 className="brand-name">CASTLY</h1>
-          <nav className="nav-links">
-            <a href="/home">Home</a>
-            <a href="/events" className="active">Events</a>
-            <a href="/profile">Profile</a>
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="events-container">
-        <div className="events-title">
-          <h1>Events Near You</h1>
-          <p>Discover workshops, meetups, and networking opportunities</p>
-        </div>
-
-        {/* Filter Buttons */}
-        <div className="filter-buttons">
-          <button className="filter-btn active">All Events</button>
-          <button className="filter-btn">This Week</button>
-          <button className="filter-btn">This Month</button>
-        </div>
-
-        {/* Loading */}
-        {loading && (
-          <div className="loading-state">
-            <div className="spinner"></div>
-            <p>Loading events...</p>
+      <div className="eventsPage">
+        {/* Header */}
+        <div className="eventsHeader">
+          <div className="eventsHeaderContent">
+            <div className="eventsBrand">
+              <div className="eventsLogo">C</div>
+              <span className="eventsBrandText">CASTLY</span>
+            </div>
+            <nav className="eventsNav">
+              <a href="/home" className="eventsNavLink">Home</a>
+              <a href="/events" className="eventsNavLink active">Events</a>
+              <a href="/profile" className="eventsNavLink">Profile</a>
+            </nav>
           </div>
-        )}
+        </div>
 
-        {/* Error */}
-        {error && (
-          <div className="error-state">
-            <p className="error-message">Error: {error}</p>
-            <p>Make sure the backend server is running</p>
+        {/* Main Content */}
+        <div className="eventsContainer">
+          <div className="eventsTitle">
+            <h1>Events Near You</h1>
+            <p>Discover workshops, meetups, and networking opportunities</p>
           </div>
-        )}
 
-        {/* Events Grid */}
-        {!loading && !error && (
-          <div className="events-grid">
-            {events.map(event => (
-              <div key={event.id} className="event-card">
-                <img src={event.image_url} alt={event.title} className="event-image" />
-                
-                <div className="event-content">
-                  <h3 className="event-title">{event.title}</h3>
-                  <p className="event-description">{event.description}</p>
+          {/* Filter Buttons */}
+          <div className="eventsTabs">
+            <button className="eventsTab active">All Events</button>
+            <button className="eventsTab">This Week</button>
+            <button className="eventsTab">This Month</button>
+          </div>
+
+          {/* Loading */}
+          {loading && (
+            <div className="eventsLoading">
+              <div className="eventsSpinner"></div>
+              <p>Loading events...</p>
+            </div>
+          )}
+
+          {/* Error */}
+          {error && (
+            <div className="eventsError">
+              <p className="eventsErrorMessage">Error: {error}</p>
+              <p>Make sure the backend server is running</p>
+            </div>
+          )}
+
+          {/* Events Grid */}
+          {!loading && !error && (
+            <div className="eventsGrid">
+              {events.map(event => (
+                <div key={event.id} className="eventCard">
+                  <img src={event.image_url} alt={event.title} className="eventImage" />
                   
-                  <div className="event-footer">
-                    <div className="event-location">
-                      <span className="location-icon">📍</span>
-                      <div>
-                        <p className="location-name">{event.location}</p>
-                        <p className="event-date">
-                          {new Date(event.date).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric',
-                            year: 'numeric'
-                          })}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="eventContent">
+                    <h3 className="eventTitle">{event.title}</h3>
+                    <p className="eventDescription">{event.description}</p>
                     
-                    <span className="distance-badge">{event.distance} mi</span>
+                    <div className="eventFooter">
+                      <div className="eventLocation">
+                        <span className="eventLocationIcon">📍</span>
+                        <div>
+                          <p className="eventLocationName">{event.location}</p>
+                          <p className="eventDate">
+                            {new Date(event.date).toLocaleDateString('en-US', { 
+                              month: 'short', 
+                              day: 'numeric',
+                              year: 'numeric'
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <span className="eventDistance">{event.distance} mi</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
-        {/* Empty State */}
-        {!loading && !error && events.length === 0 && (
-          <div className="empty-state">
-            <p>No events found nearby</p>
-          </div>
-        )}
+          {/* Empty State */}
+          {!loading && !error && events.length === 0 && (
+            <div className="eventsEmpty">
+              <p>No events found nearby</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </>
   )
 }
