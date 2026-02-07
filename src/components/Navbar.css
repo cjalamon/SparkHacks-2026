@@ -49,3 +49,7 @@
     padding: 6px 10px;
   }
 }
+.navbar {
+  background: transparent !important;
+  box-shadow: none; /* optional */
+}

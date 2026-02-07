@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
-import Navbar from '../components/Navbar.jsx';
-import SideTab from '../components/SideTab.jsx';
+import '../App.css';  // Note: ../ because we're in pages folder
 import FilterChips from '../FilterChips';
 import CreatorGrid from '../CreatorGrid';
 import MapOverlay from '../MapOverlay';
@@ -45,14 +43,12 @@ function Home() {
   }, [activeFilter, searchQuery, creators]);
 
   return (
-    <>
-      <Navbar />
-      <SideTab />
-      <div style={{ padding: 24 }}>
-        <h1>Home</h1>
-        <p>Next: Pinterest-style grid + filters + map/search.</p>
-      </div>
-    </>
+    <div>
+      <h1>TESTING - Creator Discovery</h1>
+      <p>Found {filteredCreators.length} creators</p>
+      <FilterChips activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+      <CreatorGrid creators={filteredCreators} userLocation={userLocation} />
+    </div>
   );
 }
 
