@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import FilterChips from './FilterChips';
-import CreatorGrid from './CreatorGrid';
-import MapOverlay from './MapOverlay';
+import '../App.css';  // Note: ../ because we're in pages folder
+import FilterChips from '../FilterChips';
+import CreatorGrid from '../CreatorGrid';
+import MapOverlay from '../MapOverlay';
 
 function Home() {
   const [creators, setCreators] = useState([]);
@@ -52,4 +52,4 @@ function Home() {
   );
 }
 
-export default Home;s
+export default Home;
