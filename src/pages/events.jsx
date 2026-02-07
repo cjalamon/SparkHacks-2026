@@ -30,7 +30,8 @@ export default function Events() {
     <>
       <Navbar />
       <SideTab />
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-50">
+      <div className="page-wrapper">
+        <div className="card min-h-screen">
       {/* Header */}
       <div className="bg-white shadow-md border-b-2 border-pink-200">
         <div className="container mx-auto px-8 py-6">
@@ -100,6 +101,7 @@ export default function Events() {
             <p className="text-2xl text-gray-500 mb-4">No events found nearby</p>
           </div>
         )}
+        </div>
       </div>
     </div>
     </>
