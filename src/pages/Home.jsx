@@ -48,9 +48,74 @@ function Home() {
     <>
       <Navbar />
       <SideTab />
-      <div style={{ padding: 24 }}>
-        <h1>Home</h1>
-        <p>Next: Pinterest-style grid + filters + map/search.</p>
+      <div className="eventsPage">
+        {/* Header - same as Events page */}
+        <div className="eventsHeader">
+          <div className="eventsHeaderContent">
+            <div className="eventsBrand">
+              <div className="eventsLogo">C</div>
+              <span className="eventsBrandText">CASTLY</span>
+            </div>
+            <nav className="eventsNav">
+              <a href="/home" className="eventsNavLink active">Home</a>
+              <a href="/events" className="eventsNavLink">Events</a>
+              <a href="/profile" className="eventsNavLink">Profile</a>
+            </nav>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="eventsContainer">
+          <div className="eventsTitle">
+            <h1>Discover Creators</h1>
+            <p>Find filmmakers, actors, and creatives near you</p>
+          </div>
+
+          {/* Search Bar */}
+          <div style={{ marginBottom: '20px' }}>
+            <input 
+              type="text"
+              placeholder="Search for filmmakers, actors, cameramen..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '12px 20px',
+                border: '2px solid #e5e5e5',
+                borderRadius: '8px',
+                fontSize: '16px'
+              }}
+            />
+          </div>
+
+          {/* Filter Chips */}
+          <FilterChips activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+
+          {/* Map Toggle */}
+          <div style={{ margin: '20px 0' }}>
+            <button 
+              onClick={() => setShowMap(!showMap)}
+              className="eventsTab"
+              style={{ background: showMap ? '#9333ea' : 'white', color: showMap ? 'white' : '#333' }}
+            >
+              📍 {showMap ? 'Hide Map' : 'Show Map'}
+            </button>
+          </div>
+
+          {/* Map Overlay */}
+          {showMap && (
+            <MapOverlay 
+              creators={filteredCreators}
+              userLocation={userLocation}
+              onClose={() => setShowMap(false)}
+            />
+          )}
+
+          {/* Creator Grid */}
+          <div style={{ marginTop: '20px' }}>
+            <CreatorGrid creators={filteredCreators} userLocation={userLocation} />
+          </div>
+        </div>
       </div>
     </>
   );

@@ -30,18 +30,21 @@ export default function Events() {
     <>
       <Navbar />
       <SideTab />
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-50">
-      {/* Header */}
-      <div className="events-header">
-        <div className="header-content">
-          <h1 className="brand-name">CASTLY</h1>
-          <nav className="nav-links">
-            <a href="/home">Home</a>
-            <a href="/events" className="active">Events</a>
-            <a href="/profile">Profile</a>
-          </nav>
+      <div className="eventsPage">
+        {/* Header */}
+        <div className="eventsHeader">
+          <div className="eventsHeaderContent">
+            <div className="eventsBrand">
+              <div className="eventsLogo">C</div>
+              <span className="eventsBrandText">CASTLY</span>
+            </div>
+            <nav className="eventsNav">
+              <a href="/home" className="eventsNavLink">Home</a>
+              <a href="/events" className="eventsNavLink active">Events</a>
+              <a href="/profile" className="eventsNavLink">Profile</a>
+            </nav>
+          </div>
         </div>
-      </div>
 
         {/* Main Content */}
         <div className="eventsContainer">
@@ -107,14 +110,14 @@ export default function Events() {
             </div>
           )}
 
-        {/* Empty State */}
-        {!loading && !error && events.length === 0 && (
-          <div className="empty-state">
-            <p>No events found nearby</p>
-          </div>
-        )}
+          {/* Empty State */}
+          {!loading && !error && events.length === 0 && (
+            <div className="eventsEmpty">
+              <p>No events found nearby</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </>
   )
 }

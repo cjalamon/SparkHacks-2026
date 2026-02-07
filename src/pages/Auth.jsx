@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
-import SideTab from "../components/SideTab.jsx";
 import castlyLogo from "../assets/castly-logo.png";
 
 export default function Auth() {
@@ -48,7 +47,6 @@ export default function Auth() {
   }
   return (
   <>
-    <SideTab />
     <div className="authPage">
     <div className="authCard">
       <div className="authLogoWrap">

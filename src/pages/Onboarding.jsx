@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SideTab from "../components/SideTab.jsx";
 
 export default function Onboarding() {
   const nav = useNavigate();
@@ -24,7 +23,6 @@ export default function Onboarding() {
 
   return (
     <>
-      <SideTab />
       <div style={{ padding: 24 }}>
         <h1>Build your profile</h1>
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
