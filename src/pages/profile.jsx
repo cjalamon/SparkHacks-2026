@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./profile.css";
 import Navbar from "../components/Navbar.jsx";
 import SideTab from "../components/SideTab.jsx";
@@ -7,6 +7,12 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
     name: "Your Name",
+    pronouns: "",
+    creativeType: "",
+    bio: "",
+    email: "",
+    intent: "",
+    city: "",
     headline: "Content Creator | Filmmaker | Entrepreneur",
     location: "San Francisco Bay Area",
     about: "Passionate about creating engaging content and connecting with fellow creators. Always interested in collaborations and new opportunities to grow together.",
@@ -31,6 +37,20 @@ export default function Profile() {
 
   const [editForm, setEditForm] = useState(profileData);
 
+  // Load profile data from localStorage on mount
+  useEffect(() => {
+    const savedProfile = localStorage.getItem("castly_profile");
+    if (savedProfile) {
+      try {
+        const parsedProfile = JSON.parse(savedProfile);
+        setProfileData((prev) => ({ ...prev, ...parsedProfile }));
+        setEditForm((prev) => ({ ...prev, ...parsedProfile }));
+      } catch (error) {
+        console.error("Error loading profile:", error);
+      }
+    }
+  }, []);
+
   const handleEditClick = () => {
     setEditForm(profileData);
     setIsEditing(true);
@@ -38,6 +58,8 @@ export default function Profile() {
 
   const handleSave = () => {
     setProfileData(editForm);
+    // Save to localStorage
+    localStorage.setItem("castly_profile", JSON.stringify(editForm));
     setIsEditing(false);
   };
 
@@ -159,33 +181,33 @@ export default function Profile() {
                 />
               </label>
               <label>
-                <span>Headline</span>
+                <span>Pronouns</span>
                 <input
                   type="text"
-                  name="headline"
-                  value={editForm.headline}
+                  name="pronouns"
+                  value={editForm.pronouns}
                   onChange={handleInputChange}
-                  placeholder="E.g., Content Creator | Filmmaker"
+                  placeholder="E.g., she/her, they/them"
                 />
               </label>
               <label>
-                <span>Location</span>
+                <span>Creative Type</span>
                 <input
                   type="text"
-                  name="location"
-                  value={editForm.location}
+                  name="creativeType"
+                  value={editForm.creativeType}
                   onChange={handleInputChange}
-                  placeholder="City, State"
+                  placeholder="E.g., Filmmaker, Designer, Editor"
                 />
               </label>
               <label>
-                <span>About</span>
+                <span>Bio</span>
                 <textarea
-                  name="about"
-                  value={editForm.about}
+                  name="bio"
+                  value={editForm.bio}
                   onChange={handleInputChange}
                   placeholder="Tell us about yourself..."
-                  rows="5"
+                  rows="3"
                 ></textarea>
               </label>
 
@@ -295,6 +317,8 @@ export default function Profile() {
               className="profile-photo"
             />
             <h1 className="profile-name">{profileData.name}</h1>
+            {profileData.pronouns && <p className="profile-pronouns">{profileData.pronouns}</p>}
+            {profileData.creativeType && <p className="profile-creative">{profileData.creativeType}</p>}
             <p className="profile-headline">{profileData.headline}</p>
             <p className="profile-location">📍 {profileData.location}</p>
 
@@ -307,7 +331,7 @@ export default function Profile() {
           {/* About Section */}
           <div className="profile-section">
             <h2>About</h2>
-            <p>{profileData.about}</p>
+            <p>{profileData.bio || profileData.about}</p>
           </div>
 
           {/* Skills Section */}

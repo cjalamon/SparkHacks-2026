@@ -109,6 +109,7 @@
   background: #1f2937; /* dark input */
   color: #fff;
   font-size: 15px;
+  font-family: inherit;
 }
 
 .authInput::placeholder {
@@ -118,6 +119,21 @@
 
 .authInput:focus {
   box-shadow: 0 0 0 3px rgba(122, 44, 255, 0.35);
+}
+
+.authForm textarea.authInput,
+.authForm select.authInput {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.authForm select.authInput {
+  cursor: pointer;
+}
+
+.authForm select.authInput option {
+  background: #1f2937;
+  color: #fff;
 }
 
 .authPrimaryBtn {
