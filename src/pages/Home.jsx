@@ -3,6 +3,7 @@ import '../App.css';
 import Navbar from '../components/Navbar.jsx';
 import SideTab from '../components/SideTab.jsx';
 import CreateListingForm from '../components/CreateListingForm.jsx';
+import cLogo from '../assets/c.png';
 
 function Home() {
   const [listings, setListings] = useState([]); // Changed from creators to listings
@@ -45,7 +46,13 @@ function Home() {
         <div className="eventsHeader">
           <div className="eventsHeaderContent">
             <div className="eventsBrand">
-              <div className="eventsLogo">C</div>
+              <div className="eventsLogoWrap">
+                <img
+                  src={cLogo}
+                  alt="Castly C logo"
+                  className="eventsLogo"
+                  />
+                </div>
               <span className="eventsBrandText">CASTLY</span>
             </div>
             <nav className="eventsNav">
