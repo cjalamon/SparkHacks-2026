@@ -12,11 +12,10 @@ export default function Profile() {
     bio: "",
     email: "",
     intent: "",
-    city: "",
-    headline: "Content Creator | Filmmaker | Entrepreneur",
-    location: "San Francisco Bay Area",
+    location: "City, State",
     about: "Passionate about creating engaging content and connecting with fellow creators. Always interested in collaborations and new opportunities to grow together.",
     photoUrl: "https://via.placeholder.com/150",
+    skills: [],
     experiences: [
       {
         id: 1,
@@ -36,6 +35,7 @@ export default function Profile() {
   });
 
   const [editForm, setEditForm] = useState(profileData);
+  const [skillInput, setSkillInput] = useState("");
 
   // Load profile data from localStorage on mount
   useEffect(() => {
@@ -99,6 +99,22 @@ export default function Profile() {
     setEditForm((prev) => ({
       ...prev,
       experiences: prev.experiences.filter((exp) => exp.id !== id),
+    }));
+  };
+
+  const handleAddSkill = (skill) => {
+    if (skill.trim() && !editForm.skills.includes(skill.trim())) {
+      setEditForm((prev) => ({
+        ...prev,
+        skills: [...prev.skills, skill.trim()],
+      }));
+    }
+  };
+
+  const handleRemoveSkill = (index) => {
+    setEditForm((prev) => ({
+      ...prev,
+      skills: prev.skills.filter((_, i) => i !== index),
     }));
   };
 
@@ -210,6 +226,102 @@ export default function Profile() {
                   rows="3"
                 ></textarea>
               </label>
+              <label>
+                <span>Location</span>
+                <input
+                  type="text"
+                  name="location"
+                  value={editForm.location}
+                  onChange={handleInputChange}
+                  placeholder="City, State"
+                />
+              </label>
+
+              {/* Skills Editing Section */}
+              <div>
+                <h3 style={{ margin: "0 0 12px 0", fontSize: "16px", fontWeight: "700", color: "var(--text)" }}>
+                  Skills
+                </h3>
+                <div style={{ display: "flex", gap: "10px", marginBottom: "12px" }}>
+                  <input
+                    type="text"
+                    value={skillInput}
+                    onChange={(e) => setSkillInput(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddSkill(skillInput);
+                        setSkillInput("");
+                      }
+                    }}
+                    placeholder="e.g., Video Editing, Cinematography"
+                    style={{
+                      flex: 1,
+                      padding: "10px 12px",
+                      border: "1px solid rgba(155, 89, 255, 0.12)",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      fontSize: "14px",
+                      color: "white",
+                      background: "rgba(43, 16, 54, 0.8)",
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleAddSkill(skillInput);
+                      setSkillInput("");
+                    }}
+                    style={{
+                      padding: "10px 16px",
+                      background: "var(--accent)",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Add
+                  </button>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                  {editForm.skills && editForm.skills.map((skill, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        background: "linear-gradient(90deg, rgba(155,89,255,0.1), rgba(255,157,193,0.06))",
+                        color: "var(--accent)",
+                        padding: "8px 12px",
+                        borderRadius: "18px",
+                        fontSize: "13px",
+                        border: "1px solid rgba(155,89,255,0.08)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      {skill}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSkill(index)}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          color: "var(--accent)",
+                          fontSize: "18px",
+                          cursor: "pointer",
+                          padding: 0,
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {/* Experience Editing Section */}
               <div>
@@ -319,7 +431,6 @@ export default function Profile() {
             <h1 className="profile-name">{profileData.name}</h1>
             {profileData.pronouns && <p className="profile-pronouns">{profileData.pronouns}</p>}
             {profileData.creativeType && <p className="profile-creative">{profileData.creativeType}</p>}
-            <p className="profile-headline">{profileData.headline}</p>
             <p className="profile-location">📍 {profileData.location}</p>
 
             <button className="btn-primary" onClick={handleEditClick}>
@@ -338,11 +449,13 @@ export default function Profile() {
           <div className="profile-section">
             <h2>Skills</h2>
             <div className="skills-list">
-              <span className="skill-tag">Video Production</span>
-              <span className="skill-tag">Content Creation</span>
-              <span className="skill-tag">Social Media</span>
-              <span className="skill-tag">Editing</span>
-              <span className="skill-tag">Photography</span>
+              {profileData.skills && profileData.skills.length > 0 ? (
+                profileData.skills.map((skill, index) => (
+                  <span key={index} className="skill-tag">{skill}</span>
+                ))
+              ) : (
+                <p style={{ color: "#8b6f8f", fontSize: "14px" }}>No skills added yet. Edit your profile to add skills.</p>
+              )}
             </div>
           </div>
         </div>

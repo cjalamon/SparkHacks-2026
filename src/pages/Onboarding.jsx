@@ -14,6 +14,7 @@ export default function Onboarding() {
   const [pronouns, setPronouns] = useState("");
   const [creativeType, setCreativeType] = useState("");
   const [bio, setBio] = useState("");
+  const [location, setLocation] = useState("");
   const [skillInput, setSkillInput] = useState("");
   const [skills, setSkills] = useState([]);
   const [experiences, setExperiences] = useState([]);
@@ -94,6 +95,7 @@ export default function Onboarding() {
         pronouns,
         creativeType,
         bio,
+        location,
         skills,
         experiences,
       };
@@ -159,6 +161,15 @@ export default function Onboarding() {
                   onChange={(e) => setBio(e.target.value)}
                   placeholder="Tell us about yourself and your creative journey..."
                   rows="4"
+                />
+              </label>
+              <label>
+                <span>Location</span>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="e.g., City, State"
                 />
               </label>
             </div>
