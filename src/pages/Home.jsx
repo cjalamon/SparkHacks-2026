@@ -6,6 +6,7 @@ import FilterChips from '../FilterChips';
 import CreatorGrid from '../CreatorGrid';
 import MapOverlay from '../MapOverlay';
 import CreateListingForm from '../components/CreateListingForm.jsx';
+import cLogo from '../assets/c.png';
 
 
 
@@ -57,7 +58,13 @@ function Home() {
         <div className="eventsHeader">
           <div className="eventsHeaderContent">
             <div className="eventsBrand">
-              <div className="eventsLogo">C</div>
+              <div className="eventsLogoWrap">
+                <img
+                  src={cLogo}
+                  alt="Castly C logo"
+                  className="eventsLogo"
+                  />
+                </div>
               <span className="eventsBrandText">CASTLY</span>
             </div>
           </div>

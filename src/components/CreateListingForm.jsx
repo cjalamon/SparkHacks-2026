@@ -16,19 +16,30 @@ export default function CreateListingForm({ onClose, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // For now, just add to local state
-    // Later, your teammate can add backend endpoint
-    const newListing = {
-      id: Date.now(),
-      ...formData,
-      created_at: new Date().toISOString(),
-      latitude: 34.0522,
-      longitude: -118.2437
+    try {
+        const response = await fetch('http://localhost:5001/api/listings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            ...formData,
+            latitude: 34.0522,
+            longitude: -118.2437
+        })
+        })
+        
+        if (response.ok) {
+        const newListing = await response.json()
+        onSubmit(newListing)
+        onClose()
+        alert('Listing created successfully!')
+        } else {
+        alert('Failed to create listing')
+        }
+    } catch (err) {
+        console.error('Error creating listing:', err)
+        alert('Error: Make sure backend is running on port 5001')
     }
-    
-    onSubmit(newListing)
-    onClose()
-  }
+}
 
   return (
     <div className="modal-overlay" onClick={onClose}>

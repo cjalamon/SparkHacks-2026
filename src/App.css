@@ -55,6 +55,24 @@ body {
   letter-spacing: 1px;
 }
 
+.eventsLogoWrap {
+  width: 75px;
+  height: 75px;
+  border-radius: 14px;
+  background: white;
+  display: grid;
+  place-items: center;
+  overflow: hidden; 
+}
+
+.eventsLogo {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  object-position: center;
+  transform: translateY(-4px);
+}
+
 .search-container {
   flex: 1;
   max-width: 600px;
