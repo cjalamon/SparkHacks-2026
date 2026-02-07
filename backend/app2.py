@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -40,6 +40,38 @@ class Event(db.Model):
             'distance': self.distance,
             'image_url': self.image_url,
             'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
+class Listing(db.Model):
+    __tablename__ = 'listings'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    role_type = db.Column(db.String(50), nullable=False)
+    budget = db.Column(db.String(100))
+    location = db.Column(db.String(200), nullable=False)
+    deadline = db.Column(db.String(50), nullable=False)
+    contact_email = db.Column(db.String(100), nullable=False)
+    skills_needed = db.Column(db.String(500))
+    latitude = db.Column(db.Float, default=0.0)
+    longitude = db.Column(db.Float, default=0.0)
+    created_at = db.Column(db.String(50), default=lambda: datetime.now().isoformat())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'role_type': self.role_type,
+            'budget': self.budget,
+            'location': self.location,
+            'deadline': self.deadline,
+            'contact_email': self.contact_email,
+            'skills_needed': self.skills_needed,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'created_at': self.created_at
         }
 
 # Create tables
@@ -135,6 +167,76 @@ def get_events():
     
     return jsonify([event.to_dict() for event in events])
 
+# Get all listings
+@app.route('/api/listings', methods=['GET'])
+def get_listings():
+    try:
+        listings = Listing.query.all()
+        if not listings:
+            # Return sample data if database is empty
+            sample_listings = [
+                {
+                    'id': 1,
+                    'title': 'Looking for Cinematographer',
+                    'description': 'Need experienced cinematographer for short film project.',
+                    'role_type': 'cinematographer',
+                    'budget': '$500-$1000',
+                    'location': 'Downtown LA',
+                    'deadline': '2026-03-15',
+                    'contact_email': 'filmmaker@example.com',
+                    'skills_needed': '4K Camera, Color Grading',
+                    'latitude': 34.0522,
+                    'longitude': -118.2437,
+                    'created_at': '2026-02-01T10:00:00'
+                },
+                {
+                    'id': 2,
+                    'title': 'Actors Needed for Indie Film',
+                    'description': 'Casting for lead and supporting roles in indie drama.',
+                    'role_type': 'actor',
+                    'budget': 'Unpaid (Portfolio Building)',
+                    'location': 'Santa Monica',
+                    'deadline': '2026-02-20',
+                    'contact_email': 'casting@indiefilm.com',
+                    'skills_needed': 'Previous acting experience',
+                    'latitude': 34.0195,
+                    'longitude': -118.4912,
+                    'created_at': '2026-01-28T14:30:00'
+                }
+            ]
+            return jsonify(sample_listings)
+        return jsonify([listing.to_dict() for listing in listings])
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Create new listing
+@app.route('/api/listings', methods=['POST'])
+def create_listing():
+    try:
+        data = request.json
+        
+        new_listing = Listing(
+            title=data.get('title'),
+            description=data.get('description'),
+            role_type=data.get('role_type'),
+            budget=data.get('budget', ''),
+            location=data.get('location'),
+            deadline=data.get('deadline'),
+            contact_email=data.get('contact_email'),
+            skills_needed=data.get('skills_needed', ''),
+            latitude=data.get('latitude', 0.0),
+            longitude=data.get('longitude', 0.0)
+        )
+        
+        db.session.add(new_listing)
+        db.session.commit()
+        
+        return jsonify(new_listing.to_dict()), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/events/<int:event_id>', methods=['GET'])
 def get_event(event_id):
     event = Event.query.get_or_404(event_id)
@@ -142,7 +244,6 @@ def get_event(event_id):
 
 @app.route('/api/events', methods=['POST'])
 def create_event():
-    from flask import request
     data = request.get_json()
     
     new_event = Event(
