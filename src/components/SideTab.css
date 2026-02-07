@@ -15,8 +15,10 @@
   padding: 10px 14px;
   border-radius: 12px;
   font-weight: 700;
+  color: #2b1036;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(43,16,54,0.06);
+  transition: all 0.2s ease;
 }
 
 .side-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(43,16,54,0.08); }
