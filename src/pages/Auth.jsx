@@ -44,8 +44,134 @@ export default function Auth() {
       setLoading(false);
     }
   }
-
   return (
+  <div className="auth-container">
+    <div className="auth-card">
+      <div className="brand">
+        <div className="logo">C</div>
+        <div className="brandText">
+          <div className="name">CASTLY</div>
+          <div className="tagline">Link up with creators near you.</div>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="authHeader">
+          <span className="badge">{mode === "login" ? "✨ Login" : "✨ Sign up"}</span>
+          <h1 className="auth-title">{mode === "login" ? "Welcome back" : "Create account"}</h1>
+          <p className="auth-subtitle">
+            {mode === "login" ? "Sign in to continue" : "Join creators near you."}
+          </p>
+        </div>
+
+        <div className="tabs">
+          <button
+            className={`tab ${mode === "login" ? "active" : ""}`}
+            onClick={() => setMode("login")}
+            type="button"
+          >
+            Log in
+          </button>
+          <button
+            className={`tab ${mode === "signup" ? "active" : ""}`}
+            onClick={() => setMode("signup")}
+            type="button"
+          >
+            Sign up
+          </button>
+        </div>
+
+        <form className="form" onSubmit={onSubmit}>
+          <label className="field">
+            <span>Email</span>
+            <input
+              className="auth-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@domain.com"
+              autoComplete="email"
+            />
+          </label>
+
+          <label className="field">
+            <span>Password</span>
+            <input
+              className="auth-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="min 6 characters"
+              type="password"
+              autoComplete={mode === "login" ? "current-password" : "new-password"}
+            />
+          </label>
+
+          {mode === "signup" && (
+            <>
+              <label className="field">
+                <span>Confirm password</span>
+                <input
+                  className="auth-input"
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                  placeholder="repeat password"
+                  type="password"
+                  autoComplete="new-password"
+                />
+              </label>
+
+              <div className="pillRow">
+                <button
+                  type="button"
+                  className={`pill ${intent === "work" ? "pillActive" : ""}`}
+                  onClick={() => setIntent("work")}
+                >
+                  Looking to Work
+                </button>
+                <button
+                  type="button"
+                  className={`pill ${intent === "inspo" ? "pillActive" : ""}`}
+                  onClick={() => setIntent("inspo")}
+                >
+                  Looking for Inspo
+                </button>
+              </div>
+
+              <label className="field">
+                <span>City</span>
+                <input
+                  className="auth-input"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Chicago, IL"
+                  autoComplete="address-level2"
+                />
+              </label>
+            </>
+          )}
+
+          {err && <div className="alert err">{err}</div>}
+
+          <button className="btn btnPrimary" disabled={!canSubmit || loading}>
+            {loading ? "..." : mode === "login" ? "Continue" : "Create account"}
+          </button>
+
+          {mode === "login" && (
+            <button type="button" className="btn btnSecondary" onClick={() => setMode("signup")}>
+              Create Account
+            </button>
+          )}
+
+          <div className="tiny">
+            {mode === "signup"
+              ? "Next: build your profile (links, clips, role)."
+              : "No account? Hit Sign up."}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+);
+  /*return (
     <div className="auth">
       <div className="authShell">
         <div className="brand">
@@ -153,5 +279,5 @@ export default function Auth() {
         </div>
       </div>
     </div>
-  );
+  );*/
 }
