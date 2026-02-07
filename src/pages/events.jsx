@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import './Events.css'
+import CreateEventForm from '../components/CreateEventForm.jsx'
 import EventCard from '../components/EventCard'
 import Navbar from '../components/Navbar.jsx'
 import SideTab from '../components/SideTab.jsx'
 
+
 export default function Events() {
+  const [showCreateForm, setShowCreateForm] = useState(false)
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -113,6 +116,26 @@ export default function Events() {
           )}
         </div>
       </div>
+      {/* Floating Action Button */}
+      <button 
+        className="fab-create"
+        onClick={() => setShowCreateForm(true)}
+      >
+        ➕ Create Event
+      </button>
+
+      {/* Create Event Modal */}
+      {showCreateForm && (
+        <CreateEventForm 
+          onClose={() => setShowCreateForm(false)}
+          onSubmit={(newEvent) => {
+            setEvents([newEvent, ...events])
+            fetch('http://localhost:5001/api/events')
+          .then(res => res.json())
+          .then(data => setEvents(data))
+          }}
+        />
+      )}
     </>
   )
 }

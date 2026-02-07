@@ -5,9 +5,13 @@ import SideTab from '../components/SideTab.jsx';
 import FilterChips from '../FilterChips';
 import CreatorGrid from '../CreatorGrid';
 import MapOverlay from '../MapOverlay';
+import CreateListingForm from '../components/CreateListingForm.jsx';
+
+
 
 function Home() {
   const [creators, setCreators] = useState([]);
+  const [showCreateForm, setShowCreateForm] = useState(false)
   const [filteredCreators, setFilteredCreators] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All Creatives');
   const [showMap, setShowMap] = useState(false);
@@ -112,6 +116,24 @@ function Home() {
           </div>
         </div>
       </div>
+      {/* Floating Action Button */}
+      <button 
+        className="fab-create"
+        onClick={() => setShowCreateForm(true)}
+      >
+        ➕ Create Listing
+      </button>
+
+      {/* Create Listing Modal */}
+      {showCreateForm && (
+        <CreateListingForm 
+          onClose={() => setShowCreateForm(false)}
+          onSubmit={(newListing) => {
+            // Add to creators list or refresh
+            setCreators([newListing, ...creators])
+          }}
+        />
+      )}
     </>
   );
 }
