@@ -14,3 +14,23 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.pillRow {
+  display: flex;
+  gap: 10px;
+}
+
+.pill {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pillActive {
+  border-color: rgba(124,58,237,.6);
+  box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+}
