@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./pages/Auth.jsx";
 import Events from "./pages/events.jsx";
+import Home from "./pages/Home.jsx";
+import Onboarding from "./pages/Onboarding.jsx";
 
 export default function App() {
   return (
@@ -8,6 +10,8 @@ export default function App() {
       <Routes>
         <Route path="/auth" element={<Auth />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="*" element={<Navigate to="/auth" replace />} />
       </Routes>
     </BrowserRouter>
