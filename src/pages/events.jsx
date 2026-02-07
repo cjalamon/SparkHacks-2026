@@ -38,11 +38,6 @@ export default function Events() {
               <div className="eventsLogo">C</div>
               <span className="eventsBrandText">CASTLY</span>
             </div>
-            <nav className="eventsNav">
-              <a href="/home" className="eventsNavLink">Home</a>
-              <a href="/events" className="eventsNavLink active">Events</a>
-              <a href="/profile" className="eventsNavLink">Profile</a>
-            </nav>
           </div>
         </div>
 

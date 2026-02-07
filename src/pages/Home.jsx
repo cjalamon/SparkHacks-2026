@@ -56,11 +56,6 @@ function Home() {
               <div className="eventsLogo">C</div>
               <span className="eventsBrandText">CASTLY</span>
             </div>
-            <nav className="eventsNav">
-              <a href="/home" className="eventsNavLink active">Home</a>
-              <a href="/events" className="eventsNavLink">Events</a>
-              <a href="/profile" className="eventsNavLink">Profile</a>
-            </nav>
           </div>
         </div>
 

@@ -10,26 +10,15 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-  // Signup additional fields
-  const [name, setName] = useState("");
-  const [pronouns, setPronouns] = useState("");
-  const [creativeType, setCreativeType] = useState("");
-  const [bio, setBio] = useState("");
-  const [intent, setIntent] = useState("work"); // work | inspo (signup only)
-  const [city, setCity] = useState(""); // signup only
-
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
   const canSubmit = useMemo(() => {
     if (!email.trim()) return false;
     if (password.length < 6) return false;
-    if (mode === "signup") {
-      if (password !== confirm) return false;
-      if (!name.trim()) return false;
-    }
+    if (mode === "signup" && password !== confirm) return false;
     return true;
-  }, [email, password, confirm, mode, name]);
+  }, [email, password, confirm, mode]);
 
   // Get all registered users
   function getAllUsers() {
@@ -61,16 +50,16 @@ export default function Auth() {
           return;
         }
 
-        // Create new user account
+        // Create new user account with just email and password
         const newUser = {
           email: email.trim(),
           password, // In production, this would be hashed
-          name,
-          pronouns,
-          creativeType,
-          bio,
-          intent,
-          city,
+          name: "",
+          pronouns: "",
+          creativeType: "",
+          bio: "",
+          skills: [],
+          experiences: [],
         };
 
         // Save user to users list
@@ -78,15 +67,12 @@ export default function Auth() {
         users.push(newUser);
         localStorage.setItem("castly_users", JSON.stringify(users));
 
-        // Log in the user
+        // Set current user and token
         localStorage.setItem("castly_token", "demo-token");
         localStorage.setItem("castly_current_user", email.trim());
-        localStorage.setItem(
-          "castly_profile",
-          JSON.stringify(newUser)
-        );
 
-        nav("/home");
+        // Go to onboarding
+        nav("/onboarding");
       } else {
         // Login mode
         const user = findUserByEmail(email.trim());
@@ -155,55 +141,6 @@ export default function Auth() {
           placeholder="Email"
           autoComplete="email"
         />
-
-        {mode === "signup" && (
-          <>
-            <input
-              className="authInput"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Full Name"
-              autoComplete="name"
-            />
-            <input
-              className="authInput"
-              value={pronouns}
-              onChange={(e) => setPronouns(e.target.value)}
-              placeholder="Pronouns (e.g., she/her, they/them)"
-              autoComplete="off"
-            />
-            <input
-              className="authInput"
-              value={creativeType}
-              onChange={(e) => setCreativeType(e.target.value)}
-              placeholder="Creative Type (e.g., Filmmaker, Designer)"
-              autoComplete="off"
-            />
-            <textarea
-              className="authInput"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              placeholder="Bio/About yourself"
-              rows="3"
-              style={{ resize: "vertical" }}
-            />
-            <select
-              className="authInput"
-              value={intent}
-              onChange={(e) => setIntent(e.target.value)}
-            >
-              <option value="work">Looking for Work</option>
-              <option value="inspo">Looking for Inspiration</option>
-            </select>
-            <input
-              className="authInput"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="City"
-              autoComplete="off"
-            />
-          </>
-        )}
 
         <input
           className="authInput"

@@ -9,11 +9,11 @@
 .eventsHeader {
   max-width: 1400px;
   margin: 0 auto 32px auto;
-  background: #ffffff;
+  background: linear-gradient(135deg, #b084ff 0%, #b78bff 35%, #ff9dc9 100%);
   border-radius: 28px;
-  box-shadow: 0 8px 24px rgba(43,16,54,0.06);
-  padding: 20px 32px;
-  border: 1px solid rgba(155, 89, 255, 0.12);
+  box-shadow: 0 12px 32px rgba(155, 89, 255, 0.25);
+  padding: 24px 32px;
+  border: none;
 }
 
 .eventsHeaderContent {
@@ -37,15 +37,15 @@
   place-items: center;
   font-size: 28px;
   font-weight: 800;
-  color: #9b59ff; /* Purple accent */
-  background: rgba(155, 89, 255, 0.08);
-  border: 1px solid rgba(155, 89, 255, 0.12);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .eventsBrandText {
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: #9b59ff; /* Purple accent */
+  color: #ffffff;
   font-size: 20px;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .eventsNavLink {
-  color: #6b5978; /* Muted purple-gray */
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-weight: 700;
   font-size: 15px;
@@ -65,11 +65,13 @@
 }
 
 .eventsNavLink:hover {
-  color: #9b59ff; /* Purple accent */
+  color: #ffffff;
 }
 
 .eventsNavLink.active {
-  color: #9b59ff; /* Purple accent */
+  color: #ffffff;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.8);
+  padding-bottom: 4px;
 }
 
 /* Main Container */
