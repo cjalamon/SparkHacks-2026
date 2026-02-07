@@ -4,7 +4,7 @@
   align-items: center;
   padding: 12px 20px;
   background: linear-gradient(90deg, #9b59ff 0%, #ff9dc1 100%);
-  box-shadow: 0 2px 8px rgba(155, 89, 255, 0.15);
+  box-shadow: none;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -48,8 +48,4 @@
     font-size: 12px;
     padding: 6px 10px;
   }
-}
-.navbar {
-  background: transparent !important;
-  box-shadow: none; /* optional */
 }

@@ -4,6 +4,7 @@ import CreateEventForm from '../components/CreateEventForm.jsx'
 import EventCard from '../components/EventCard'
 import Navbar from '../components/Navbar.jsx'
 import SideTab from '../components/SideTab.jsx'
+import cLogo from '../assets/c.png'
 
 
 export default function Events() {
@@ -38,7 +39,13 @@ export default function Events() {
         <div className="eventsHeader">
           <div className="eventsHeaderContent">
             <div className="eventsBrand">
-              <div className="eventsLogo">C</div>
+              <div className="eventsLogoWrap">
+                <img
+                  src={cLogo}
+                  alt="Castly C logo"
+                  className="eventsLogo"
+                />
+              </div>
               <span className="eventsBrandText">CASTLY</span>
             </div>
           </div>

@@ -26,13 +26,13 @@ body {
 
 /* NAVIGATION BAR */
 .navbar {
-  background: var(--white);
-  padding: 16px 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(90deg, #9b59ff 0%, #ff9dc1 100%);
+  padding: 12px 20px;
+  box-shadow: none;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 2px solid var(--light-pink);
+  border-bottom: none;
 }
 
 .navbar-content {
