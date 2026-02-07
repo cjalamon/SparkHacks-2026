@@ -1,5 +1,7 @@
 import { useState } from "react";
-import "../profile/src/profile.css";
+import "./profile.css";
+import Navbar from "../components/Navbar.jsx";
+import SideTab from "../components/SideTab.jsx";
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -96,7 +98,10 @@ export default function Profile() {
   };
 
   return (
-    <div className="profile-container">
+    <>
+      <Navbar />
+      <SideTab />
+      <div className="profile-container">
       {/* Header Banner */}
       <div className="profile-banner"></div>
 
@@ -371,5 +376,6 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    </>
   );
 }
