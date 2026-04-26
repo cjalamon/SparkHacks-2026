@@ -94,10 +94,13 @@ The frontend communicates with the backend through API calls, allowing dynamic d
 Castly is a project focused on combining creativity and technology to build meaningful connections. It demonstrates full-stack development, teamwork, and the ability to turn an idea into a functional application.
 
 
-## Images & Demo Video
+## Images
 
 <img width="1294" height="777" alt="Screenshot 2026-04-16 at 2 10 53 PM" src="https://github.com/user-attachments/assets/678432f2-58b7-4bc5-8ba7-54c90ad6cd10" />
 <br><br>
 <img width="1367" height="777" alt="Screenshot 2026-04-16 at 2 11 44 PM" src="https://github.com/user-attachments/assets/3f6fd4c5-87be-4ab8-8c36-14272bc19bbc" />
 <br><br>
-[![Demo Video Here](https://youtu.be/Hll9VNC0YV0?si=Lp7kowqwwRdkqP9L)](https://youtube.com)
+
+## 🎥 Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/Hll9VNC0YV0/0.jpg)](https://youtu.be/Hll9VNC0YV0)
