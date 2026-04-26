@@ -1,79 +1,85 @@
-# 🎨✨ Castly - Website for Connecting Creatives
+# Castly 🎨✨
 
-## Inspiration
+## Overview
 
-Castly was inspired by the interactive and community-driven aspects of professional networking platforms, particularly the ability to connect with others and discover opportunities. We wanted to replicate the job‑hunting and connection experience specifically for creative artists. This vision is reflected in our profile and home pages, where users can showcase their work and discover others.
-
-Additionally, our UI design was inspired by modern, user‑friendly platforms. We aimed to create a welcoming and visually appealing experience that highlights local events and creatives users can visit or connect with.
+Castly is a full-stack web application designed to connect creative individuals within their local communities. The platform allows users to discover artists, explore creative events, and build meaningful connections. Inspired by the networking aspects of professional platforms and the user-friendly design of modern marketplace apps, Castly focuses on making collaboration and discovery intuitive and engaging.
 
 ---
 
 ## What It Does
 
-Castly connects creatives within their local communities. Users can:
+Castly enables users to:
 
-* Search for creatives that meet their needs
-* Discover local creative events
+* Search for local creatives based on their needs or interests
+* Discover and attend creative events
 * Connect with artists for collaboration or inspiration
-* Explore profiles showcasing creative work
+* View and create profiles showcasing creative work
 
-Castly helps users find inspiration, build connections, and grow within their creative communities.
-
----
-
-## How We Built It
-
-We developed Castly using a modern web development stack:
-
-* **Frontend:** React.js
-* **Backend:** Python with Flask
-* **Development Tooling:** Vite
-* **Design:** Figma
-
-The frontend and backend communicate to deliver a dynamic and responsive web experience for users.
+The goal is to create a living, dynamic space where creative communities can grow and stay active.
 
 ---
 
-## Challenges We Ran Into
+## How It Was Built
 
-One of the biggest challenges was getting started. With a large project and many ideas, determining where to begin was difficult. Additionally, building the frontend structure and ensuring smooth routing between pages required careful planning and coordination.
+Castly was developed as a full-stack web application using modern technologies:
+
+* **Frontend:** React.js for building interactive and responsive UI components
+* **Backend:** Python with Flask to handle server-side logic and API communication
+* **Tooling:** Vite for fast development and build processes
+* **Design:** Figma for UI/UX prototyping and layout design
+
+The frontend communicates with the backend through API calls, allowing dynamic data flow between users and the application.
 
 ---
 
-## Accomplishments That We're Proud Of
+## Development Process
 
-* Successfully connecting the frontend and backend
-* Building multiple routed web pages
-* Creating a clean, user‑friendly UI
-* Collaborating effectively as a team during development
+1. Brainstormed and defined the core idea and user experience
+2. Designed UI/UX wireframes using Figma
+3. Built frontend pages and routing using React
+4. Developed backend endpoints using Flask
+5. Connected frontend and backend for full functionality
+6. Tested features and debugged issues throughout development
+
+---
+
+## Challenges & Bugs Fixed
+
+* **Getting Started:** One of the biggest challenges was narrowing down ideas and deciding where to begin with such a large project scope.
+* **Frontend Structure:** Organizing components and routing between pages required multiple revisions.
+* **Frontend-Backend Communication:** Initial issues with API calls and data flow were resolved by refining request handling and debugging endpoints.
+* **Collaboration Issues:** Early merge conflicts were resolved by adopting better Git practices such as branching and frequent commits.
+
+---
+
+## Accomplishments
+
+* Successfully integrated frontend and backend systems
+* Built multiple routed pages with smooth navigation
+* Created a clean and user-friendly interface
+* Collaborated effectively in a team setting during a hackathon
 
 ---
 
 ## What We Learned
 
-Throughout the project, we learned:
-
-* How to effectively communicate tasks using Discord
-* How to collaborate using Git and GitHub
-* How to manage changes across multiple contributors
-* How to work efficiently in a hackathon/group environment
-
-These skills were especially valuable since many team members were new to collaborative development.
+* How to collaborate using Git and GitHub in a team environment
+* How to communicate effectively using tools like Discord
+* How to break down large problems into manageable tasks
+* How to rapidly prototype and iterate during a hackathon
 
 ---
 
-## What's Next for Castly 🚀
+## Future Improvements 🚀
 
-Future improvements for Castly include:
-
-* Implementing a geographical map interface
-* Allowing users to discover creators within a specific radius
-* Sorting creators by preference, proximity, or services offered
-* Enhancing UI/UX for better discovery and interaction
+* Implement a map-based feature to show nearby creatives
+* Add filtering by proximity, category, or services
+* Enhance UI/UX for better user engagement
+* Expand backend capabilities for scalability
 
 ---
 
-## Built With
+## Tools & Technologies
 
 * Figma
 * Flask
@@ -83,34 +89,15 @@ Future improvements for Castly include:
 
 ---
 
-## Team Vision
+## Conclusion
 
-Castly aims to empower creatives by making it easier to connect, collaborate, and discover inspiration locally. Our goal is to build a platform where creativity thrives through community.
+Castly is a project focused on combining creativity and technology to build meaningful connections. It demonstrates full-stack development, teamwork, and the ability to turn an idea into a functional application.
 
----
 
-## Getting Started (Optional Future Section)
-
-```bash
-# Clone repository
-git clone https://github.com/your-username/castly.git
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
----
-
-## License
-
-This project was created for educational and hackathon purposes.
-
-## Images
+## Images & Demo Video
 
 <img width="1294" height="777" alt="Screenshot 2026-04-16 at 2 10 53 PM" src="https://github.com/user-attachments/assets/678432f2-58b7-4bc5-8ba7-54c90ad6cd10" />
 <br><br>
 <img width="1367" height="777" alt="Screenshot 2026-04-16 at 2 11 44 PM" src="https://github.com/user-attachments/assets/3f6fd4c5-87be-4ab8-8c36-14272bc19bbc" />
+<br><br>
 
